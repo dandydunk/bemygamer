@@ -140,6 +140,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 MEMBERS_DIR = localsettings.MEMBERS_DIR
+DB_PATH = localsettings.DB_PATH
+OTHER_PICS_DIR = localsettings.OTHER_PICS_DIR
 
 STATIC_URL = '/static/'
 STATIC_PATH_FULL = os.path.join(BASE_DIR, "static")
