@@ -1,0 +1,184 @@
+npx webpack --config webpack.config.js --watch
+sass --watch src/scss:static/css
+python manage.py runserver
+
+
+{"birthYear":2002,"birthDay":1,"birthMonth":1,"gender":0,"sexualOrientation":0,"heightFeet":4,"heightInches":0,"weight":0,"questions":[{"questionId":"1","answers":["1"]},{"questionId":"2","answers":["5"]},{"questionId":"3","answers":["7","10"]},{"questionId":"4","answers":["14","16"]},{"questionId":"5","answers":["22"]},{"questionId":"6","answers":["26"]}]}
+
+Website opens
+*register pagfe
+** sign up from
+*** email
+*** password
+*** name
+*** sexual orientation
+*** age
+*** zip
+
+*login page
+**make form login user
+
+*forgot password page
+
+*after login or sign up
+**ask for height
+**body type
+**relationship status
+**kids?
+**do you want kids?
+**education level
+**smoke?
+**drink??
+**ethenticity
+**religion
+**interests?
+**description
+
+
+todo:
+*change react to production
+*get wizard plugin
+
+
+
+*login page
+**change link colors 
+**facebook link
+**twitter link
+**instagram link
++**email link
+-user name text box
+-password text box
+-submit button
+***show dialog
+***email input box
+***password input box
+***submit button
+**header style
+**text style
+**remove bottom line
+**recover account link
+*register page
+*privacy policy page
+**add text
+*about us page
+**add text
+*safety rules page
+**add text
+*inbox page
+*likes                                                                    
+*search page
+*settings page
+**manage blocked users
+*profile page
+**name
+**age
+**about you text
+**photos
+**interests and sports
+**movies
+**music
+**books
+**appearance
+***height
+***weight
+***eye color
+***hair color
+***body type
+**lifestyle
+***smoke
+***drink
+***4/20
+***have kids
+***want kids
+**background
+***faith
+*make menu slide in and out
+*add preloader to get member
+
+**clearsessions. It’s recommended to call this command on a regular basis, for example as a daily cron job.
+
+
+npx babel --watch src\reactcom\ --out-dir static\js\reactcom\ --presets react-app/prod 
+sass --watch bemygamersite/templates/:static/css/
+
+match algo
+--likes--
+*smoking
+1. yes
+2. no
+
+*religion
+3. blah1
+4. blah2
+5. blah3
+
+*hair color
+6. black
+7. brown
+8. blonde
+
+
+amazon account:
+theatomicbarbie@gmail.com
+Welcome1!@#
+
+Administrator
+gG!CG$SBsep!Fb7M;w8DpFiYTMxlAReX
+
+localhost admin:
+admin123/pass
+
+
+delete from bemygamersite_memberphoto;
+delete from bemygamersite_memberprofile;
+delete from bemygamersite_member;
+
+facebook appId = 138680447569606
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '{your-app-id}',
+      cookie     : true,
+      xfbml      : true,
+      version    : '{api-version}'
+    });
+      
+    FB.AppEvents.logPageView();   
+      
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+log for 3/19/2020
+* had to start and restart the server from the amazon console
+* got the facebook sdk for login  
+
+google maps API key, my personal account:AIzaSyCOFf7OKZ-LGsx7sc26EimvBjKt49iGg0I
+
+delete from bemygamersite_memberinterestanswer;
+delete from bemygamersite_memberconnection;
+delete from bemygamersite_memberphoto;
+delete from bemygamersite_memberprofile;
+delete from bemygamersite_inboxmessage;
+delete from bemygamersite_inbox;
+delete from auth_user;
+
+
+delete from bemygamersite_memberphoto;
+delete from bemygamersite_membermoviegenre;
+
+
+
+delete from bemygamersite_membergameconsole;
+delete from bemygamersite_memberprofile;
+delete from auth_user;

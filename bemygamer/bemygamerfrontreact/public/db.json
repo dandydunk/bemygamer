@@ -1,0 +1,14 @@
+{
+    "version":"1.0",
+    "genders":["Male", "Female", "Other"],
+    "sexualOrientations":["Straight", "Gay", "Other"],
+    "gameConsoles":["XBOX", "PS4", "PS1", "PS2", "PS3", "Nintendo", "PC", "Android", "IPhone"],
+    "educationLevels":["Some College", "College", "More Than College", "Supernatural", "High School", "Never Attended", "Other"],
+    "Sports":["basketball", "baseball", "football", "hockey", "golf", "track", "tennis"],
+    "MusicGenres":["rap", "pop", "hip hop", "gangsta rap", "blues", "country", "rock", "oldies", "reggae", "soul"],
+    "MovieGenres":["horror", "fantasy", "action", "drama", "documentary", "tv shows", "romance", "independant", "comedy", "cartoon", "crime", "history", "war", "cooking", "education"],
+    "GameConsoles":["XBOX", "PS4", "PS1", "PS2", "PS3",  "Nintendo", "PC", "Android", "IPhone"],
+    "BookGenres":["horror", "fantasy", "action", "drama", "documentary", "tv shows", "romance", "independant", "crime",     "history", "war", "cooking", "education"],
+    "Food":["italian", "mexican", "bbq", "american", "cajun", "seafood", "vegetarian"],
+    "Entertainment":["fashion", "modeling", "celebrities", "cars", "technology", "science","traveling"]
+}

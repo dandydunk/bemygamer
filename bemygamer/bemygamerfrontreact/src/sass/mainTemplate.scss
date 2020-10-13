@@ -1,0 +1,78 @@
+@import "main";
+
+#pageMainTemplate {
+    background:url("/images/backgrounds/love.png") repeat;
+    background-size:contain;
+    #buttonShowMenu {
+        text-align:center;
+    }
+    #menu {
+        position: fixed;
+        top:0;
+        left:0;
+        z-index:9999;
+        min-width:75vw;
+        height:100vh;
+        background-color:#FF0090;
+        color:#FFA4D7;
+        transition: transform 1s;
+        text-align:center;
+        overflow-y:scroll;
+
+        .menuProfileMemberName {
+            font-family: 'Righteous', cursive;
+            font-size:1em;
+        }
+
+        button {
+            background-color: #AAFF00;
+            color:#689C00;
+            border:none;
+            font-size:1.2em;
+            margin:10px;
+            padding:10px;
+            font-weight: bold;
+            border-radius: 20px;
+            font-family: 'Sansita Swashed', cursive;
+        }
+
+        #boxMemberProfile {
+            margin:20px;
+            #menuProfilePic {
+                width:150px;
+                display:block;
+                margin:0 auto;
+                border-radius: 50px;
+                border:thin solid black;
+            }
+        }
+
+        
+
+        li {
+            a {
+                display:block;
+                background-color:#86004C;
+                margin-bottom:10px;
+                text-align:center;
+                text-decoration: none;
+                font-size:1.2em;
+                color:#FFA4D7;
+                padding:10px;
+                font-family: 'Sansita Swashed', cursive;
+            }
+
+            a:hover {
+                background-color:black;
+            }
+        }
+    }
+
+    .showMenu {
+        transform:translate(0, 0);
+    }
+
+    .hideMenu {
+        transform:translate(-150vw, 0);
+    }
+}

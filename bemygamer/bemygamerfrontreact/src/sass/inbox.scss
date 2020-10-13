@@ -1,0 +1,30 @@
+@import "main";
+
+#pageInbox {
+
+}
+
+#pageInboxChat {
+    overflow:hidden;
+    margin:0;
+    padding:0;
+    #boxChat {
+        width:100vw;
+    }
+
+    .boxChatMessages {
+        width:100%;
+        height:90%;
+        background-color: black;
+        opacity: .9;
+    }
+
+    .inputChatMessage {
+        height:10%;
+        width:100%;
+        background-color:black;
+        color:white;
+        opacity: .9;
+
+    }
+}

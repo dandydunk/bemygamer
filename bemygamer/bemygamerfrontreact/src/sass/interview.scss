@@ -1,0 +1,39 @@
+@import "main";
+
+#pageInterview {
+    background:url("/images/backgrounds/903580.png") repeat;
+    background-size: contain;
+    width:100vw;
+    height:100vh;
+    padding-top:2vw;
+    overflow:hidden;
+    .selectedButton {
+        background-color:black;
+        color:white;
+    }
+
+    form {
+        position: relative;
+        transition: all 1s;
+        width:100vw;
+        height:100vh;
+        overflow-y:auto;
+        padding-top:10vw;
+        border-top-right-radius: 30vw;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        section {
+            background:black;
+            color:white;
+            border-radius: 5px;
+            margin-top:3vw;
+            width:70%;
+            margin-bottom:30px;
+            .title {
+                font-size:150%;
+                text-decoration: underline;
+                margin-bottom:5vw;
+            }
+        }
+    }
+}

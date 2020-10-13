@@ -1,0 +1,67 @@
+@import "main";
+
+#pageDashboard {
+    flex:1;
+    width:100vw;
+
+    .qube-perspective {
+        perspective:900px;
+    }
+
+    #cubeGallery {
+        width: 150px;
+        height: 150px;
+        transition: transform 1s;
+        transform:rotateY(30deg);
+    }
+    
+    #cubeGallery > * {
+        background: red;
+    }
+
+    .memberAttribute {
+        background:url("/images/backgrounds/stain.jpg");
+        background-size:cover;
+        color:black;
+        font-family: 'Lobster', cursive;
+        font-weight:bold;
+        font-size:200%;
+        padding:2vw;
+        margin:1vw;
+        border-bottom-right-radius: 20px;
+        border-top-left-radius: 30px;
+        border:thin solid #ffa36c;
+        transition: all 1s;
+        opacity: .6;
+    }
+
+    .panel {
+        background-color:black;
+        color:white;
+        padding-left:10vw;
+        padding-bottom:10vh;
+        opacity: .9;
+        margin:10px;
+        border-radius: 20px;
+
+        .title {
+            color:#d54062;
+            border-bottom: thick dashed #ffa36c;
+            border-left: thick solid #799351;
+            border-radius: 10px;
+            margin-bottom:3vh;
+            font-family: "Black Ops One";
+        }
+    }
+
+    
+
+    .memberList {
+        display: flex;
+        overflow-x:auto;
+
+        button {
+            margin-right:2vw;
+        }
+    }
+}
