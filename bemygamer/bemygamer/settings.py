@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import time
+from . import localsettings
 
 APP_VERSION = time.time()
 
@@ -63,9 +64,7 @@ MIDDLEWARE = [
     'bemygamersite.middleware.CustomHttpReponseHeaders'
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000"
-]
+CORS_ALLOWED_ORIGINS = localsettings.CORS_ALLOWED_ORIGINS
 
 ROOT_URLCONF = 'bemygamer.urls'
 
@@ -85,8 +84,6 @@ TEMPLATES = [
         },
     },
 ]
-
-TEMPLATE_PAGES = "dark/html/"
 
 WSGI_APPLICATION = 'bemygamer.wsgi.application'
 
@@ -142,7 +139,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-MEMBERS_DIR = "C:\\Users\\macol\\OneDrive\\clients\\bemygamer\\bemygamer\\bemygamermemberfiles\\members\\"
+MEMBERS_DIR = localsettings.MEMBERS_DIR
 
 STATIC_URL = '/static/'
 STATIC_PATH_FULL = os.path.join(BASE_DIR, "static")
