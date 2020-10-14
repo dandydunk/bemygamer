@@ -72,6 +72,11 @@ export default class MainTemplate extends React.Component  {
     });
   }
 
+  onClickLink(e) {
+    this.refMenu.current.addEventListener("transitionend", this.menuTransitionEnd.bind(this));
+    this.setState({showMenu:false});
+  }
+
   render() {
     let menuClass = "hideMenu";
     if(this.state.showMenu) {
@@ -93,7 +98,7 @@ export default class MainTemplate extends React.Component  {
                 <button onClick={(e)=>{e.preventDefault(); this.logOut(); }}>LOG OUT</button>
             </div>
             <ul>
-                <li><Link to="/members/">Home</Link></li>
+                <li><Link onClick={this.onClickLink.bind(this)} to="/members/">Home</Link></li>
             </ul>
         </nav>
         
