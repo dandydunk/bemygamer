@@ -142,6 +142,7 @@ USE_TZ = True
 MEMBERS_DIR = localsettings.MEMBERS_DIR
 DB_PATH = localsettings.DB_PATH
 OTHER_PICS_DIR = localsettings.OTHER_PICS_DIR
+FILE_SERVER = localsettings.FILE_SERVER
 
 STATIC_URL = '/static/'
 STATIC_PATH_FULL = os.path.join(BASE_DIR, "static")

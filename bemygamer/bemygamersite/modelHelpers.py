@@ -202,7 +202,7 @@ def getMemberProfileViewLimited(memberProfileDb):
         settings.MEMBERS_DIR, str(memberProfileDb.member_id))
     memberDirPath = os.path.join(memberDirPath, "photos")
 
-    data["memberProfilePhoto"] = "http://localhost:8075/members/{memberId}/photos/{photoName}"\
+    data["memberProfilePhoto"] = settings.FILE_SERVER+"members/{memberId}/photos/{photoName}"\
     .format(memberId=memberProfileDb.member_id,
             photoName=os.listdir(memberDirPath)[0])
 
