@@ -237,7 +237,7 @@ def getMemberProfileView(memberProfileDb):
     memberDirPath = os.path.join(memberDirPath, "photos")
     photos = []
     for photo in os.listdir(memberDirPath):
-        photos.append("http://localhost:8075/members/{memberId}/photos/{photoName}"
+        photos.append(settings.FILE_SERVER+"members/{memberId}/photos/{photoName}"
                       .format(memberId=memberProfileDb.member_id, photoName=photo))
     data["photos"] = photos
 
