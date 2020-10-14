@@ -166,6 +166,7 @@ def saveProfile(request, profile):
     if "isNew" not in profileJson:
         profileJson["isNew"] = False
 
+    print("saving a new profile...")
     ret = modelHelpers.saveProfile(
         profileJson, request.user, profileJson["isNew"])
     return JsonResponse(ret, safe=False)

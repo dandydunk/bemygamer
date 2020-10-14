@@ -312,6 +312,7 @@ def saveProfile(profile, member, isNew):
               "birthDate",
               "latLong"]
 
+    print("cleaning the request...")
     for p in profile:
         # print("checking["+p+"]["+str(profile[p])+"]")
         if profile[p] and not isinstance(profile[p], (bool, int, float)):
@@ -328,28 +329,34 @@ def saveProfile(profile, member, isNew):
         memberProfile = MemberProfile()
         memberProfile.member = member
 
+    print("checking for a name...")
     if "name" in profile and not utils.IsEmpty(profile["name"]):
         member.first_name = profile["name"]
         member.save()
 
+    print("checking for a birthday...")
     if "rangeBirthDay" in profile and not utils.IsEmpty(profile["rangeBirthDay"]) and "rangeBirthYear" in profile and not utils.IsEmpty(profile["rangeBirthYear"]) and "rangeBirthYear" in profile and not utils.IsEmpty(profile["birthMonth"]):
         profile["birthDate"] = datetime(month=int(profile["birthMonth"]),
                                         year=int(profile["rangeBirthYear"]), day=int(profile["rangeBirthDay"]))
 
+    print("checking for a latitude...")
     if "latitude" in profile and not utils.IsEmpty(profile["latitude"]) and "longitude" in profile and not utils.IsEmpty(profile["longitude"]):
         profile["latLong"] = Point(
             float(profile["latitude"]), float(profile["longitude"]))
 
     # check if profile object is not corrupted
+    print("checking if the profile is corrupted...")
     if isNew:
         for value in values:
             if value not in profile:
                 return {"error": "invalid profile object; ["+value+"] is missing"}
     # BooleanField
+    print("creating the profile objeect..")
     for value in values:
         if value in profile:
             setattr(memberProfile, value, profile[value])
 
+    print("saving the profile...")
     memberProfile.save()
     return {"success": True}
 
