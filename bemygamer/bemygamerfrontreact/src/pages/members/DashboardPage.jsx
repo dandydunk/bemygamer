@@ -113,7 +113,7 @@ export default class DashboardPage extends React.Component {
   }
 
   getFeatures() {
-    let exclude = ["photos", "memberId", "name", "zip", "distance", "matchPercentage"]
+    let exclude = ["photos", "memberId", "sexualOrientation", "age", "name", "zip", "distance", "matchPercentage"]
     let memberMatchFeatures = [];
     for (let feature in this.state.memberMatch) {
       if (exclude.indexOf(feature) > -1) {

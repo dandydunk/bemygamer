@@ -45,7 +45,7 @@ export default class ProfilePage extends React.Component {
     }
 
     getFeatures() {
-        let exclude = ["photos", "memberId", "name", "zip", "age", "distance", "matchPercentage"]
+        let exclude = ["photos", "sexualOrientation", "memberId", "name", "zip", "age", "distance", "matchPercentage"]
         let memberMatchFeatures = [];
         for (let feature in this.state.otherMember) {
             if (exclude.indexOf(feature) > -1) {
