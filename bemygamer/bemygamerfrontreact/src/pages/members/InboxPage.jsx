@@ -40,7 +40,7 @@ export default class InboxPage extends React.Component {
         this.setState({ otherMember: mp, isLoaded: true });
         this.webWorker = new Worker("/inboxWebWorker.js");
         this.webWorker.postMessage({memberId:this.props.match.params.memberId,
-                                      lastIndex:0, loop:true})
+                                      lastIndex:0, loop:true, apiServer:this.props.system.apiUrl})
         this.webWorker.onmessage = e => {
           this.setState({chatMessages:[...this.state.chatMessages, ...e.data]});
         }

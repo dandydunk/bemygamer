@@ -19,14 +19,14 @@ import MemberPage from './pages/members/MemberPage';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    if (!props.apiUrl) {
+    if (!process.env.REACT_APP_BEMYGAMER_API_SERVER) {
       throw Error("The API URL is not set")
     }
 
     this.state = { systemInit: false };
 
     this.system = new BeMyGamer();
-    this.system.setApiUrl(props.apiUrl);
+    this.system.setApiUrl(process.env.REACT_APP_BEMYGAMER_API_SERVER);
 
     this.system.firebaseConfig = {
       apiKey: "AIzaSyDiitErwfzUOUE-2jWJE0-lMoJb3L6bTLk",
@@ -38,7 +38,8 @@ export default class App extends React.Component {
       appId: "1:846648586342:web:0bc85f4ae8f1d047f2fda7",
       measurementId: "G-5VYC7JHDR3"
     };
-
+    //($env:REACT_APP_BEMYGAMER_API_SERVER="http://localhost:8000") -and (npm start)
+    console.log("123env = ", process.env)
   }
 
   componentDidMount() {

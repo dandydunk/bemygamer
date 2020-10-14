@@ -1,11 +1,12 @@
 this.timeoutMs = 100;
 this.lastIndex = 0;
 this.memberId = 0;
+this.apiServer = null;
 this.getMessages = (loop)=>{
     if(!this.memberId) {
         throw new Error("the member id is missing, can't start the worker thread");
     }
-    fetch(`http://localhost:8000/members/getMessages/${this.memberId}/${this.lastIndex}/`, {
+    fetch(`${this.apiServer}members/getMessages/${this.memberId}/${this.lastIndex}/`, {
         credentials: "include"
     })
     .then(r => r.json())
@@ -32,6 +33,7 @@ this.getMessages = (loop)=>{
 this.onmessage = e=> {
     if(e.data.memberId) {
         this.memberId = e.data.memberId;
+        this.apiServer = e.data.apiServer;
     }
     
     if(e.data.loop) {
