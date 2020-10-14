@@ -157,13 +157,14 @@ export default class DashboardPage extends React.Component {
           alert("there was an error trying to like the member.")
         }
 
-        this.getLatestLikedMembers();
+        
         this.setState({ likingMember: false, nextMatchLoading: false });
         return;
       }
 
       else {
         this.setState({ memberMatch: result });
+        this.getLatestLikedMembers();
         this.getFeatures();
         this.loadCubeGallery();
         this.setState({ likingMember: false, nextMatchLoading: false });
