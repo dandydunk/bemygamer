@@ -43,7 +43,7 @@ class Command(BaseCommand):
 
         self.stdout.write("making profiles...")
         response = urllib.request.urlopen(
-            "https://randomuser.me/api/?results=20")
+            "https://randomuser.me/api/?results=100")
         accounts = json.loads(response.read())
         # self.stdout.write("# accounts ["+str(len(data["results"]))+"]")
         for account in accounts["results"]:
