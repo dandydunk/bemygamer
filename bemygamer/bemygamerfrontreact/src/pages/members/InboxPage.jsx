@@ -47,6 +47,10 @@ export default class InboxPage extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    this.setInboxChatHeight();
+  }
+
   getMessages(cb) {
     if(!this.indexMessageStartId) {
       this.indexMessageStartId = 0;

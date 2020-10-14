@@ -16,7 +16,8 @@ export default class InterviewQuestion1 extends React.Component {
       zip: "",
       photos: [],
       isNew: true,
-      isSubmittingZipCode: false
+      isSubmittingZipCode: false,
+      gameConsoles:[]
     };
     this.questionBlah = [{
       name: "smokeTabacco", label: "Do you smoke tabacco?"
@@ -241,6 +242,40 @@ export default class InterviewQuestion1 extends React.Component {
     return (
       <form className="box-brown" id={this.props.id}>
         <div>
+        <section className="transitionAll wrapingBox">
+            <label className="title">What game consoles do you play?</label>
+            <br />
+
+            <div className="wrapingBox">
+              {this.props.system.getDb().gameConsoles
+                .map((e, i) => <button style={{ margin: "1vw" }}
+                  onClick={(me) => {
+                    me.preventDefault();
+                    let indexE = this.state.gameConsoles.indexOf(e);
+                    let gc = this.state.gameConsoles;
+                    if(indexE > -1) {
+                      gc.splice(indexE, 1);
+                    }
+                    else {
+                      gc.push(e);
+                    }
+                    this.setState({ gameConsoles: gc });
+                    //this.showNextQuestion();
+                  }}
+                  className={"button buttonCheckBox " + (this.state.gameConsoles.indexOf(e) > -1 ? "selectedButton" : "")} key={e}>{e}</button>)}
+              <button 
+                onClick={
+                  e=>{
+                    e.preventDefault();
+                    if(this.state.gameConsoles.length) {
+                      this.showNextQuestion();
+                    }
+                  }
+                }
+               style={{display:(this.state.gameConsoles.length ? "block":"none")}} className="button buttonSave">SAVE</button>
+            </div>
+          </section>
+
           <section className="transitionAll">
             <input type="text" onChange={this.onChange.bind(this)}
               name="zip" className="input" value={this.state.zip} placeholder="What is your zip code?" />

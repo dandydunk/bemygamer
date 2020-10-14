@@ -42,6 +42,7 @@ class MemberProfile(models.Model):
 
     photos = models.JSONField(null=True)
     likedMembers = models.JSONField(null=True)
+    gameConsoles = models.JSONField(null=True)
     membersWhoLikeYou = models.JSONField(null=True)
     attributes = models.JSONField(null=True)
 

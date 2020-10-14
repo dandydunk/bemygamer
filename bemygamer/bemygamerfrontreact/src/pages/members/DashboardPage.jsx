@@ -10,6 +10,7 @@ export default class DashboardPage extends React.Component {
     this.state = {
       nextMatchLoading: false,
       isLoaded: false,
+      unmounted:true,
       memberMatch: {name:""},
       memberMatchFeatures: [],
       latestInboxMessages:[],
@@ -22,6 +23,8 @@ export default class DashboardPage extends React.Component {
     this.props.system.checkAuth();
 
     document.title = "dashboard";
+    console.log("mounting the dashboard...");
+    this.setState({ unmounted: false });
 
     this.loadNextMatch(() => {
       this.setState({ isLoaded: true });
@@ -34,9 +37,23 @@ export default class DashboardPage extends React.Component {
     this.getLatestLikedMembers();
   }
 
+  componentWillUnmount() {
+    console.log("unmounting the dashboard...");
+    this.setState({ unmounted: true });
+  }
+
+  componentDidUpdate() {
+    console.log("dashboard is updating...");
+  }
+
   getLatestInboxMessages() {
+    if(!this.state.unmounted) {
+      return;
+    }
+    console.log("checking for inbox messages...");
     this.props.system.getMember().getLatestInboxMessages(result=>{
       this.setState({latestInboxMessages:result})
+      setTimeout(()=>{this.getLatestInboxMessages();}, 10000);
     })
   }
 
