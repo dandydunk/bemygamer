@@ -204,7 +204,7 @@ def getMemberProfileViewLimited(memberProfileDb):
     return data
 
 
-def getMemberProfileView(memberProfileDb):
+def getMemberProfileView(memberProfileDb, sessionMemberProfileDb = None):
     if not memberProfileDb:
         return None
     data = {}
@@ -235,6 +235,13 @@ def getMemberProfileView(memberProfileDb):
         photos.append(settings.FILE_SERVER+"members/{memberId}/photos/{photoName}"
                       .format(memberId=memberProfileDb.member_id, photoName=photo))
     data["photos"] = photos
+
+    if sessionMemberProfileDb:
+        data["distance"] = utils.CalculateDistanceBetweenMembers(
+            sessionMemberProfileDb.latLong, memberProfileDb.latLong)
+        data["distance"] = str(data["distance"])+" Miles Away"
+        data["matchPercentage"] = calculateMatch(sessionMemberProfileDb, memberProfileDb)
+        data["matchPercentage"] = str(data["matchPercentage"])+"% Compatibility Match"
 
     return data
 

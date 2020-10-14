@@ -197,9 +197,11 @@ export default class DashboardPage extends React.Component {
           <div style={{ display: (this.state.nextMatchLoading ? "block" : "none") }}>Loading your next match...</div>
           <div style={{ display: (this.state.nextMatchLoading ? "none" : "block") }}>
             <h2 className="title">
-              :::You may like "{this.state.memberMatch.name}",&nbsp;
-              {this.state.memberMatch.distance},&nbsp;
-              {this.state.memberMatch.matchPercentage}
+              :::You may like "{this.state.memberMatch.name}", {this.state.memberMatch.age}
+              <br />
+              :::{this.state.memberMatch.distance}
+              <br />
+              :::{this.state.memberMatch.matchPercentage}
             </h2>
             <div style={{ display: "flex" }}>
               <div style={{ width: "200px", marginRight: "4vw" }}>

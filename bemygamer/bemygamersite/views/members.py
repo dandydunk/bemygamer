@@ -16,11 +16,15 @@ def getProfileById(request, memberId):
     if not request.user.is_authenticated:
         return utils.JsonNoSessionError()
 
-    sessionMemberProfile = modelHelpers.getMemberProfileById(memberId)
-    if not sessionMemberProfile:
+    otherMemberProfile = modelHelpers.getMemberProfileById(memberId)
+    if not otherMemberProfile:
         return utils.JsonError("the member has no profile.")
 
-    return JsonResponse(modelHelpers.getMemberProfileView(sessionMemberProfile), safe=False)
+    sessionMemberProfile = modelHelpers.getMemberProfileById(request.user.id)
+    if not sessionMemberProfile:
+        return utils.JsonError("the session member has no profile.")
+
+    return JsonResponse(modelHelpers.getMemberProfileView(otherMemberProfile, sessionMemberProfile), safe=False)
 
 
 def getLatestLikedMembers(request):
