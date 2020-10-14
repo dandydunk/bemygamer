@@ -1,14 +1,12 @@
 import React from 'react';
 import "../../sass/interview.scss";
+import LoadingPage from '../LoadingPage';
 import InterviewQuestion1 from "./interviewQuestions/interviewQuestion1"
-import InterviewQuestion2 from "./interviewQuestions/interviewQuestion2"
-import InterviewQuestion3 from "./interviewQuestions/interviewQuestion3"
-import InterviewQuestion4 from "./interviewQuestions/interviewQuestion4"
 
 export default class InterviewPage extends React.Component  {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {isLoaded:false};
   }
 
   resizeQuestions(inEvent) {
@@ -35,6 +33,10 @@ export default class InterviewPage extends React.Component  {
     if(this.props.system.getMember().hasProfile()) {
       window.location = "/";
     }
+
+    this.props.system.initDb(()=>{
+      this.setState({isLoaded:true})
+    })
   }
 
   finished() {
@@ -42,6 +44,9 @@ export default class InterviewPage extends React.Component  {
   }
 
   render() {
+    if(!this.state.isLoaded) {
+      return <LoadingPage />
+    }
     return(
       <div id="pageInterview">
         <InterviewQuestion1 

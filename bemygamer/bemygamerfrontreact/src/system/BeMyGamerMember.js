@@ -72,6 +72,11 @@ export default class BeMyGamerMember {
         this.system.get(`members/login/${token}/`, cb);
     }
 
+    logout(token, cb, networkerrcb) {
+        console.log("WTD!!!")
+        this.system.get(`members/logout/`, cb, networkerrcb);
+    }
+
     register(cb, ecb) {
         this.system.get(`members/register/?email=${this.email}&password=${this.password}&name=${this.name}`,
             cb, ecb);

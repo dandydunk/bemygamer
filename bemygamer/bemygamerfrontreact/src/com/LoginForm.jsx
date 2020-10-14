@@ -30,10 +30,11 @@ export default class LoginForm extends React.Component {
     this.setState({ isBeingSubmitted: true })
 
     console.log("logging in...");
-    firebase.auth().onAuthStateChanged(user => {
-      console.log("user: ", user);
-      if (user) {
+    firebase.auth().signInWithEmailAndPassword(this.state.loginEmail, this.state.loginPassword)
+      .then(i => {
+        console.log("getting token...");
         firebase.auth().currentUser.getIdToken(true).then(token => {
+          console.log("confirming token...");
           this.props.system.getMember().login(token, result => {
             if (result.error) {
               if (result.error.msg) {
@@ -45,20 +46,16 @@ export default class LoginForm extends React.Component {
               this.setState({ isBeingSubmitted: false });
               return;
             }
-            alert("you are now logged in.");
+            console.log("init member...");
+            this.props.system.getMember().init(()=>{
+              console.log("login finished...");
+              window.location = "/members/";
+            })
           });
         }).catch(function (error) {
           // Handle error
         });
-      }
-      else {
-        console.log("user is null")
-      }
-    });
-
-    console.log("state =", this.state)
-    firebase.auth().signInWithEmailAndPassword(this.state.loginEmail, this.state.loginPassword)
-    .then(i=>{console.log("iiii = ", i);})
+      })
       .catch(error => {
         var errorMessage = error.message;
         Alert.show(errorMessage);
@@ -68,7 +65,7 @@ export default class LoginForm extends React.Component {
 
   render() {
     return (
-      <form className="box-brown">
+      <form className="box-brown" {...this.props}>
         <div className="boxFormField">
           <span className="form-field-error hide"></span>
           <input className="input" placeholder="Email" type="email" value={this.state.loginEmail} onChange={this.onChangeField.bind(this)} name="loginEmail" />

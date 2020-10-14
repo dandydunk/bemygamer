@@ -9,13 +9,13 @@ export default class BeMyGamer {
         this.version = "1.012";
     }
 
-    init(cb) {
+    initDb(cb) {
         //get the db
         fetch("/db.json")
             .then(i => i.json())
             .then(i => {
                 this.db = i;
-                this.getMember().init(cb);
+                if(cb) cb();
             })
     }
 
@@ -137,9 +137,7 @@ export default class BeMyGamer {
                     cb(r);
                 }
             }).catch(error => {
-                console.log("HER111E");
                 if (!errorcb) return;
-                console.log("HERE");
                 errorcb(error);
             })
     }

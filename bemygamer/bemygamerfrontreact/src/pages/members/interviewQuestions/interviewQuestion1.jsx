@@ -15,7 +15,8 @@ export default class InterviewQuestion1 extends React.Component {
       heightInches: 0,
       zip: "",
       photos: [],
-      isNew:true
+      isNew: true,
+      isSubmittingZipCode: false
     };
     this.questionBlah = [{
       name: "smokeTabacco", label: "Do you smoke tabacco?"
@@ -100,13 +101,15 @@ export default class InterviewQuestion1 extends React.Component {
 
   finished() {
     let data = JSON.stringify(this.state);
-    console.log("sending profile data to server ".data);
+    console.log("sending profile data to server ", data);
     this.props.system.getMember().saveProfile(data, e => {
-      if (e.error) {
+      console.log("finished!!kowq");
+      if (e && e.error) {
         alert("There was an error saving the profile..");
         return;
       }
-      console.log("finished saving the profile.")
+      console.log("redirecvting...");
+      window.location = "/members/";
     }, () => {
       alert("There was a network error; try again later.")
     })
@@ -160,22 +163,18 @@ export default class InterviewQuestion1 extends React.Component {
     }
   }
 
-  onChangeZipCode(e) {
-
-  }
-
   onClickZipCodeSubmit(e) {
     e.preventDefault();
     if (this.state.isSubmittingZipCode || !this.state.zip.length) {
       return;
     }
 
-    this.state.isSubmittingZipCode = true;
+    this.setState({ isSubmittingZipCode: true })
     this.props.system.getLocationFromZipCode(this.state.zip, result => {
       if (result.error) {
         if (result.error.msg) {
           alert(result.error.msg);
-          this.state.isSubmittingZipCode = false;
+          this.setState({ isSubmittingZipCode: false })
         }
       }
       else {
@@ -184,7 +183,7 @@ export default class InterviewQuestion1 extends React.Component {
       }
     }, error => {
       alert("There was a network error, try again in a moment");
-      this.isSubmittingZipCode = false;
+      this.setState({ isSubmittingZipCode: false })
     })
   }
 
@@ -242,7 +241,17 @@ export default class InterviewQuestion1 extends React.Component {
     return (
       <form className="box-brown" id={this.props.id}>
         <div>
-
+          <section className="transitionAll">
+            <input type="text" onChange={this.onChange.bind(this)}
+              name="zip" className="input" value={this.state.zip} placeholder="What is your zip code?" />
+            <br />
+            <button style={{ marginLeft: "100%", display: (this.state.zip.length > 0 ? "block" : "none") }} className="button buttonSave"
+              onClick={this.onClickZipCodeSubmit.bind(this)}>
+              <span style={{ "display": (this.state.isSubmittingZipCode ? "none" : "block") }}>SAVE</span>
+              <LoadingIcon width="50px" height="50px" message="saving your location"
+                style={{ "display": (this.state.isSubmittingZipCode ? "block" : "none") }} />
+            </button>
+          </section>
 
           <section className="transitionAll">
             <label className="title">Upload photos</label>
@@ -250,7 +259,7 @@ export default class InterviewQuestion1 extends React.Component {
             <input type="file" onChange={this.onChangePhotos.bind(this)} multiple="multiple" accept="image/*" />
             <br />
             <button className="transitionAll button buttonSave"
-              style={{ marginLeft: "100%", opacity: (this.state.photos.length > 0 ? 100 : 50) }}
+              style={{ marginLeft: "100%", opacity: (this.state.photos.length > 0 ? 100 : 0) }}
               onClick={this.onSavePhotos.bind(this)}>
               <span style={{ "display": (this.state.isSavingPhotos ? "none" : "block") }}>SAVE</span>
               <LoadingIcon width="50px" height="50px" message="saving your photos"
@@ -309,7 +318,7 @@ export default class InterviewQuestion1 extends React.Component {
                     this.setState({ educationLevelDesired: e });
                     this.showNextQuestion();
                   }}
-                  className={(this.state.educationLevel === e ? "selectedButton" : "")} key={e}>{e}</button>)}
+                  className={"button buttonCheckBox " + (this.state.educationLevel === e ? "selectedButton" : "")} key={e}>{e}</button>)}
               <button style={{ margin: "1vw" }}
                 onClick={(me) => {
                   me.preventDefault();
@@ -319,18 +328,7 @@ export default class InterviewQuestion1 extends React.Component {
             </div>
           </section>
 
-          <section className="transitionAll">
-            <input type="text" onChange={this.onChange.bind(this)}
-              name="zip" value={this.state.zip} placeholder="What is your zip code?" />
-            <br />
-            <button style={{ marginLeft: "100%" }} className="button buttonSave"
-              onClick={this.onClickZipCodeSubmit.bind(this)}>NEXT
-                    <div style={{ opacity: (this.state.isSubmittingZipCode ? 100 : 0) }}>
-                Loading...
-                    </div>
-              <LoadingIcon />
-            </button>
-          </section>
+
 
           <section className="transitionAll">
             <label className="title">You are a...</label>
@@ -339,7 +337,7 @@ export default class InterviewQuestion1 extends React.Component {
               {this.props.system.getDb().genders
                 .map((e, i) => <button style={{ margin: "1vw" }}
                   onClick={(me) => { me.preventDefault(); this.setState({ gender: e }); this.showNextQuestion(); }}
-                  className={(this.state.gender === e ? "selectedButton" : "")} key={e}>{e}</button>)}
+                  className={"button buttonCheckBox " + (this.state.gender === e ? "selectedButton" : "")} key={e}>{e}</button>)}
             </div>
           </section>
 
@@ -350,7 +348,7 @@ export default class InterviewQuestion1 extends React.Component {
               {this.props.system.getDb().sexualOrientations
                 .map((e, i) => <button style={{ margin: "1vw" }}
                   onClick={(me) => { me.preventDefault(); this.setState({ sexualOrientation: e }); this.showNextQuestion(); }}
-                  className={(this.state.sexualOrientation === e ? "selectedButton" : "")} key={e}>{e}</button>)}
+                  className={"button buttonCheckBox " + (this.state.sexualOrientation === e ? "selectedButton" : "")} key={e}>{e}</button>)}
             </div>
           </section>
 
@@ -361,7 +359,7 @@ export default class InterviewQuestion1 extends React.Component {
               {this.props.system.getDb().educationLevels
                 .map((e, i) => <button style={{ margin: "1vw" }}
                   onClick={(me) => { me.preventDefault(); this.setState({ educationLevel: e }); this.showNextQuestion(); }}
-                  className={(this.state.educationLevel === e ? "selectedButton" : "")} key={e}>{e}</button>)}
+                  className={"button buttonCheckBox " + (this.state.educationLevel === e ? "selectedButton" : "")} key={e}>{e}</button>)}
             </div>
           </section>
 
@@ -371,16 +369,19 @@ export default class InterviewQuestion1 extends React.Component {
             <div className="wrapingBox">
               {["January", "February", "March", "April", "May", "June", "July",
                 "August", "September", "October", "November", "December"]
-                .map((e, i) => <button style={{ margin: "1vw" }} onClick={(me) => { me.preventDefault(); this.setState({ birthMonth: i + 1 }); this.showNextQuestion(); }} className={(this.state.birthMonth === e ? "selectedButton" : "")} key={e}>{e}</button>)}
+                .map((e, i) => <button style={{ margin: "1vw" }}
+                  onClick={(me) => { me.preventDefault(); this.setState({ birthMonth: i + 1 }); this.showNextQuestion(); }}
+                  className={"button buttonCheckBox " + (this.state.birthMonth === e ? "selectedButton" : "")} key={e}>{e}</button>)}
             </div>
           </section>
 
           <section className="transitionAll wrapingBox">
             <label className="title">your birth day is... {this.state.rangeBirthDay}</label>
             <br />
-            <input type="range" name="rangeBirthDay" onChange={this.onChange.bind(this)} value={this.state.rangeBirthDay} min="1" max="31" />
+            <input type="range" className="input" name="rangeBirthDay"
+              onChange={this.onChange.bind(this)} value={this.state.rangeBirthDay} min="1" max="31" />
             <br />
-            <button className="buttonNextImage" style={{ marginLeft: "100%" }}
+            <button className="button buttonSave" style={{ marginLeft: "100%" }}
               onClick={e => { e.preventDefault(); this.showNextQuestion(); }}>NEXT</button>
 
           </section>
@@ -388,9 +389,9 @@ export default class InterviewQuestion1 extends React.Component {
           <section className="transitionAll wrapingBox">
             <label className="title">your birth year is... {this.state.rangeBirthYear}</label>
             <br />
-            <input type="range" name="rangeBirthYear" onChange={this.onChange.bind(this)} value={this.state.rangeBirthYear} min="1920" max="2002" />
+            <input type="range" className="input" name="rangeBirthYear" onChange={this.onChange.bind(this)} value={this.state.rangeBirthYear} min="1920" max="2002" />
             <br />
-            <button style={{ marginLeft: "100%" }} className="buttonNextImage"
+            <button style={{ marginLeft: "100%" }} className="button buttonSave"
               onClick={e => { e.preventDefault(); this.showNextQuestion(); }}>NEXT</button>
 
           </section>
@@ -398,22 +399,22 @@ export default class InterviewQuestion1 extends React.Component {
           <section className="transitionAll wrapingBox">
             <label className="title">your height is... {this.state.heightFeet}'{this.state.heightInches}</label>
             <br />
-            <input type="range" name="rangeHeight"
+            <input type="range" className="input" name="rangeHeight"
               onChange={this.onChangeHeight.bind(this)}
               value={this.state.rangeHeight} min="0" max="44" />
             <br />
-            <button style={{ marginLeft: "100%" }} className="buttonNextImage"
+            <button style={{ marginLeft: "100%" }} className="button buttonSave"
               onClick={e => { e.preventDefault(); this.showNextQuestion(); }}>NEXT</button>
           </section>
 
           <section className="transitionAll wrapingBox">
             <label className="title">you weight... {this.state.weight} pounds</label>
             <br />
-            <input type="range" name="weight"
+            <input type="range" name="weight" className="input"
               onChange={this.onChange.bind(this)}
               value={this.state.weight} min="50" max="600" />
             <br />
-            <button style={{ marginLeft: "100%" }} className="buttonNextImage"
+            <button style={{ marginLeft: "100%" }} className="button buttonSave"
               onClick={e => { e.preventDefault(); this.showNextQuestion(); }}>NEXT</button>
 
           </section>

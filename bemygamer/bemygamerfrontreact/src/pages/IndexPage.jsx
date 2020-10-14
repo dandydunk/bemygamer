@@ -131,11 +131,11 @@ export default class IndexPage extends React.Component {
                     <h3 className="color-FF5D7A">Browse profiles and chat with gamers with interests that you will enjoy.</h3>
                 </div>
 
-                <div className="container-full container-full-flex">
-                    <img src="/images/landing/be_my_gamer.png" alt="Be My Gamer" />
+                <div style={{display:"flex", width:"100vw", height:"100vh", flexWrap:"wrap", flexShrink:4, alignSelf:"center", justifyContent:"center"}}>
+                    <img style={{width:"40vw"}} src="/images/landing/be_my_gamer.png" alt="Be My Gamer" />
 
-                    <div>
-                        <LoginForm system={this.props.system} />
+                    <div style={{flex:1}}>
+                        <LoginForm style={{marginBottom:"5vw"}} system={this.props.system} />
                         <RegisterForm system={this.props.system} />
                     </div>
                 </div>

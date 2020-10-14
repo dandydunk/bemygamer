@@ -1,0 +1,19 @@
+@import "main";
+
+#pageProfile {
+    width:100vw;
+    min-height:100vh;
+    .qube-perspective {
+        perspective:900px;
+    }
+
+    #cubeGallery {
+        width: 150px;
+        height: 150px;
+        animation: rotation 15s infinite linear;
+    }
+    
+    #cubeGallery > * {
+        background: red;
+    }
+}

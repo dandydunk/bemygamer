@@ -217,6 +217,22 @@ button {
     }
 }
 
+.memberAttribute {
+    background:url("/images/backgrounds/stain.jpg");
+    background-size:cover;
+    color:black;
+    font-family: 'Lobster', cursive;
+    font-weight:bold;
+    font-size:200%;
+    padding:2vw;
+    margin:1vw;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 30px;
+    border:thin solid #ffa36c;
+    transition: all 1s;
+    opacity: .6;
+}
+
 .box-brown {
     background: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(169,89,45,1) 100%);
     border-radius:10px;
@@ -244,6 +260,7 @@ button {
         padding-right:1vw;
         padding-top:1vh;
         padding-bottom:1vh;
+        margin-bottom:1vw;
         &:focus {
             border: 5px dashed #593600;
         }

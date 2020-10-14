@@ -10,7 +10,7 @@ export default class DashboardPage extends React.Component {
     this.state = {
       nextMatchLoading: false,
       isLoaded: false,
-      memberMatch: null,
+      memberMatch: {name:""},
       memberMatchFeatures: [],
       latestInboxMessages:[],
       latestLikedMembers:[],
@@ -112,6 +112,35 @@ export default class DashboardPage extends React.Component {
     this.setState({ memberMatchFeatures: memberMatchFeatures });
   }
 
+  skipMemberAndGetNextMatch(memberId) {
+    if (this.state.likingMember) {
+      return;
+    }
+
+    this.setState({ likingMember: true, nextMatchLoading: true });
+    this.props.system.getMember().skipMemberAndGetNextMatch(memberId, result => {
+      if (result.error) {
+        if (result.error.msg) {
+          alert(result.error.msg);
+        }
+
+        else {
+          alert("there was an error trying to skip the member.")
+        }
+
+        this.setState({ likingMember: false, nextMatchLoading: false });
+        return;
+      }
+
+      else {
+        this.setState({ memberMatch: result });
+        this.getFeatures();
+        this.loadCubeGallery();
+        this.setState({ likingMember: false, nextMatchLoading: false });
+      }
+    })
+  }
+
   likeMemberAndGetNextMatch(memberId) {
     if (this.state.likingMember) {
       return;
@@ -128,6 +157,7 @@ export default class DashboardPage extends React.Component {
           alert("there was an error trying to like the member.")
         }
 
+        this.getLatestLikedMembers();
         this.setState({ likingMember: false, nextMatchLoading: false });
         return;
       }
@@ -141,17 +171,10 @@ export default class DashboardPage extends React.Component {
     })
   }
 
-  loadChat() {
-
-  }
-
   render() {
-    if (!this.state.isLoaded) {
-      return <LoadingPage />
-    }
     return (
       <div id="pageDashboard">
-
+        <LoadingPage style={{display:(this.state.isLoaded ? "none":"block")}} />
         <div className="panel" style={{ display: (this.state.memberMatch ? "block" : "none") }}>
           <div style={{ display: (this.state.nextMatchLoading ? "block" : "none") }}>Loading your next match...</div>
           <div style={{ display: (this.state.nextMatchLoading ? "none" : "block") }}>
@@ -178,7 +201,8 @@ export default class DashboardPage extends React.Component {
                 <button style={{ display: "block" }}
                   className="buttonNextImage"
                   onClick={e => { e.preventDefault(); console.log("pushing to chat"); this.props.history.push(`/members/inbox/${this.state.memberMatch.memberId}/`) }}>chat</button>
-                <button style={{ display: "block" }} className="buttonNextImage" onClick={this.loadChat.bind(this)}>block</button>
+                <button style={{ display: "block" }} className="buttonNextImage" 
+                onClick={e => { e.preventDefault(); this.skipMemberAndGetNextMatch(this.state.memberMatch.memberId) }}>skip</button>
               </div>
               <div style={{ display: "flex", flexWrap: "wrap" }}>
                 {
@@ -195,7 +219,7 @@ export default class DashboardPage extends React.Component {
         </div>
 
         <div className="panel" style={{display:(this.state.latestInboxMessages ? "block":"none")}}>
-          <h2 className="title">:::Newest Inbox Messages</h2>
+          <h2 className="title">:::Your Inbox</h2>
           <ul className="memberList">
             {
               this.state.latestInboxMessages.map((message,i) => {
@@ -208,7 +232,7 @@ export default class DashboardPage extends React.Component {
         </div>
 
         <div className="panel" style={{display:(this.state.latestLikedMembers ? "block":"none")}}>
-          <h2 className="title">:::Newest Members You Liked</h2>
+          <h2 className="title">:::Members You Liked</h2>
           <div className="memberList">
             {
               this.state.latestLikedMembers.map((result,i) => {

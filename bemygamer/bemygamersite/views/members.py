@@ -108,10 +108,11 @@ def skipMemberAndGetNextMatch(request, memberIdToLike):
 
     otherMemberProfile = modelHelpers.getMemberProfileById(memberIdToLike)
     if not otherMemberProfile:
-        return utils.JsonError("The member id to like doesn't have a profile.")
+        return utils.JsonError("The member id to skip doesn't have a profile.")
 
     modelHelpers.skipMember(sessionMemberProfile, otherMemberProfile)
 
+    sessionMemberProfile = modelHelpers.getMemberProfileById(request.user.id)
     nextMatch = modelHelpers.getNextMatch(sessionMemberProfile)
     return JsonResponse(nextMatch if nextMatch else {}, safe=False)
 
@@ -133,6 +134,7 @@ def likeMemberAndGetNextMatch(request, memberIdToLike):
 
     modelHelpers.likeMember(sessionMemberProfile, otherMemberProfile)
 
+    sessionMemberProfile = modelHelpers.getMemberProfileById(request.user.id)
     nextMatch = modelHelpers.getNextMatch(sessionMemberProfile)
     return JsonResponse(nextMatch if nextMatch else {}, safe=False)
 
@@ -152,7 +154,7 @@ def getNextMatch(request):
 def logout(request):
     aLogout(request)
 
-    return JsonResponse({})
+    return JsonResponse({}, safe=False)
 
 
 def saveProfile(request, profile):
@@ -207,7 +209,8 @@ def login(request, loginToken):
 
     aLogin(request, user)
 
-    return JsonResponse({})
+    return JsonResponse({"isLoggedIn": True,
+                         "profile": modelHelpers.getMemberProfileView(modelHelpers.getMemberProfileById(request.user.id))}, safe=False)
 
 
 def register(request):

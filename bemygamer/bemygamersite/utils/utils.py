@@ -10,6 +10,8 @@ def GetJsonFromFile(file):
         return json.load(json_file)
 
 def IsEmpty(e):
+    if e and isinstance(e, (bool, int, float)):
+        return False
     return True if e == None or len(e.strip()) == 0 else False
 
 def IsStrTooLong(e):

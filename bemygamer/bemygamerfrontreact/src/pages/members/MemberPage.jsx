@@ -9,6 +9,7 @@ import DashboardPage from './DashboardPage'
 import LoadingPage from "../LoadingPage"
 import EditProfilePage from "./EditProfilePage"
 import MainTemplate from "../MainTemplate"
+import ProfilePage from "./ProfilePage"
 
 export default class MemberPage extends React.Component {
   constructor(props) {
@@ -31,6 +32,7 @@ export default class MemberPage extends React.Component {
     return (
       <MainTemplate {...this.props}>
             <Switch>
+            <Route exact path={`${match.path}profile/:memberId/`}  render={props=>{return <ProfilePage {...props} system={this.props.system} />}} />
               <Route exact path={`${match.path}editProfile/`}  render={props=>{return <EditProfilePage {...props} system={this.props.system} />}} />
               <Route exact path={`${match.path}inbox/:memberId/`} render={props=>{return <InboxPage {...props} system={this.props.system} />}} />
               <Route path={`${match.path}inbox/`} render={props=>{return <InboxPage {...props} system={this.props.system} />}}  />

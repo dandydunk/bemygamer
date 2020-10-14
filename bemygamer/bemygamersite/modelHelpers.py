@@ -12,6 +12,9 @@ from django.db.models import Q
 
 def getLatestLikedMembers(memberProfile):
     likedMembers = memberProfile.likedMembers
+    if not likedMembers or not len(likedMembers):
+        return []
+        
     count = 0
     ret = []
     for likedMember in likedMembers:

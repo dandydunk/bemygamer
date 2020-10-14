@@ -1,7 +1,8 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import "../sass/mainTemplate.scss"
-
+import * as firebase from "firebase/app";
+import "firebase/auth";
 
 export default class MainTemplate extends React.Component  {
   constructor(props) {
@@ -22,6 +23,8 @@ export default class MainTemplate extends React.Component  {
 
   componentDidMount() {
     this.props.system.addEventListener("profile", this.profileChangeEvent.bind(this));
+    console.log("init firebase...");
+    firebase.initializeApp(this.props.system.firebaseConfig);
   }
 
   componentWillUnmount() {
@@ -50,6 +53,24 @@ export default class MainTemplate extends React.Component  {
     this.setState({showMenu:false});
   }
 
+  logOut() {
+    console.log("soinging out...");
+    firebase.auth().signOut().then(()=>{
+      console.log("logging out nw")
+      this.props.system.getMember().logout(()=>{
+        console.log("done...");
+        window.location = "/";
+        return;
+      }, e=>{
+        alert("newoprlk error!");
+        console.log("error - ", e)
+      });
+    }).catch(function(error) {
+      alert("error trying to log out...");
+      console.log("error:", error);
+    });
+  }
+
   render() {
     let menuClass = "hideMenu";
     if(this.state.showMenu) {
@@ -68,16 +89,10 @@ export default class MainTemplate extends React.Component  {
                     src={this.state.profilePic} />
                 <div className="menuProfileMemberName">{this.state.name}</div>
                 <button onClick={(e)=>{e.preventDefault(); this.props.history.push("/members/editProfile/");}}>EDIT PROFILE</button>
-                <button>LOG OUT</button>
+                <button onClick={(e)=>{e.preventDefault(); this.logOut(); }}>LOG OUT</button>
             </div>
             <ul>
                 <li><Link to="/members/">Home</Link></li>
-                <li><Link to="/members/inbox/">Inbox</Link></li>
-                <li><Link to="/members/likes/">Likes</Link></li>
-                <li><Link to="/members/connections/">Connections</Link></li>
-                <li><Link to="/news/">News</Link></li>
-                <li><Link to="/events/">Events</Link></li>
-                <li><Link to="/blog/">Blog</Link></li>
             </ul>
         </nav>
         

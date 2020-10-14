@@ -4,6 +4,22 @@
     flex:1;
     width:100vw;
 
+    @keyframes rotation {
+        0% {
+            transform: rotateY(0deg);
+          }
+        25% {
+          transform: rotateY(360deg);
+        }
+        50% {
+          transform: rotateY(0deg);
+        }
+
+          100% {
+            transform: rotateX(360deg);
+          }
+      }
+
     .qube-perspective {
         perspective:900px;
     }
@@ -11,29 +27,14 @@
     #cubeGallery {
         width: 150px;
         height: 150px;
-        transition: transform 1s;
-        transform:rotateY(30deg);
+        animation: rotation 15s infinite linear;
     }
     
     #cubeGallery > * {
         background: red;
     }
 
-    .memberAttribute {
-        background:url("/images/backgrounds/stain.jpg");
-        background-size:cover;
-        color:black;
-        font-family: 'Lobster', cursive;
-        font-weight:bold;
-        font-size:200%;
-        padding:2vw;
-        margin:1vw;
-        border-bottom-right-radius: 20px;
-        border-top-left-radius: 30px;
-        border:thin solid #ffa36c;
-        transition: all 1s;
-        opacity: .6;
-    }
+    
 
     .panel {
         background-color:black;

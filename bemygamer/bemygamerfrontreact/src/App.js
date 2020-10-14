@@ -43,11 +43,9 @@ export default class App extends React.Component {
 
   componentDidMount() {
     this.preloadImages(() => {
-      this.setState({systemInit:true})
-      /*this.system.init(() => {
-        console.log("the system is now ready...");
-        this.setState({systemInit:true})
-      });*/
+      this.system.getMember().init(()=>{
+        this.setState({systemInit:true});
+      })
     })
   }
 

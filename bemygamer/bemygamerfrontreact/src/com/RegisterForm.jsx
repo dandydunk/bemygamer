@@ -81,7 +81,7 @@ export default class RegisterForm extends React.Component {
             <form className="box-brown" {...this.props}>
                 <div>
                     <p className="error">{this.state.inputRegisterNameError}</p>
-                    <input placeholder="What should your name be?" 
+                    <input placeholder="Name or Nick Name" 
                     ref={(input) => { this.inputRegisterName = input; }}
                      type="text" className="input" 
                      onChange={this.onChange.bind(this)} name="inputRegisterName" />
@@ -89,7 +89,7 @@ export default class RegisterForm extends React.Component {
 
                 <div>
                     <p className="error">{this.state.inputRegisterEmailError}</p>
-                    <input placeholder="What is your email address?" 
+                    <input placeholder="Email" 
                     ref={input => { this.inputRegisterEmail = input }} 
                     type="email" className="input"
                     onChange={this.onChange.bind(this)} name="inputRegisterEmail" />
@@ -99,7 +99,7 @@ export default class RegisterForm extends React.Component {
                 <div>
                     <p className="error">{this.state.inputRegisterPasswordError}</p>
                     <input 
-                    placeholder="What is your secret code?" 
+                    placeholder="Password" 
                     type="password" 
                     className="input"
                     ref={input => { this.inputRegisterPassword = input }} onChange={this.onChange.bind(this)} name="inputRegisterPassword" />
