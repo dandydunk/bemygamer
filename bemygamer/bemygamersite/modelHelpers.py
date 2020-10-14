@@ -93,16 +93,11 @@ def saveChatMessage(message, fromMember, otherMember):
         m.memberTwo = otherMember.member
         m.save()
 
-    msg = InboxMessage.objects.filter(
-        inbox__id=m.id, fromMember__id=fromMember.member_id, isPublished=False)
-    if not len(msg):
-        msg = InboxMessage()
-    else:
-        msg = msg[0]
+    msg = InboxMessage()
     msg.inbox = m
     msg.fromMember = fromMember.member
     msg.message = message
-    msg.isPublished = False
+    msg.isPublished = True
     msg.dateTimeSent = timezone.now()
     msg.save()
 

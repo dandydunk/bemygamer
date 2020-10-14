@@ -18,11 +18,10 @@ export default class InboxPage extends React.Component {
 
   keyPress(e) {
     if (e.keyCode == 13) {
-      this.props.system.publishChatMessage(this.state.otherMember.memberId, ()=>{
-        if(this.webWorker) {
-          this.webWorker.postMessage();
-        }
-      })
+      if(!e.target.value.trim().length) {
+        return;
+      }
+      this.props.system.saveChatMessage(e.target.value, this.state.otherMember.memberId);
       this.setState({ inputChatMessage: "" });
       
       
@@ -100,10 +99,7 @@ export default class InboxPage extends React.Component {
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value })
-    if (e.target.value.length == 0) {
-      return;
-    }
-    this.props.system.saveChatMessage(e.target.value, this.state.otherMember.memberId);
+    //
   }
 
   formatDateTime(ft) {
