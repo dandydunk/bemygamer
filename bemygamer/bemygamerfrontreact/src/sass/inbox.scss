@@ -19,12 +19,23 @@
         opacity: .9;
     }
 
+    ::placeholder {
+        color:black;
+        opacity: .9;
+    }
+
+    ::-ms-input-placeholder { /* Microsoft Edge */
+        color:black;
+        opacity: .9;
+    }
+
     .inputChatMessage {
+        
+        
         height:10%;
         width:100%;
-        background-color:black;
-        color:white;
-        opacity: .9;
+        background-color:grey;
+        color:black;
 
     }
 }

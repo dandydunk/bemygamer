@@ -126,6 +126,7 @@ export default class BeMyGamer {
             credentials: "include"
         })
             .then(r => {
+                //console.log("r = ", r)
                 if (!r.ok) {
                     throw Error("The HTTP request failed.");
                 }
@@ -133,6 +134,7 @@ export default class BeMyGamer {
                 return r.json();
             })
             .then(r => {
+                //console.log("calling the CB!")
                 if (cb) {
                     cb(r);
                 }

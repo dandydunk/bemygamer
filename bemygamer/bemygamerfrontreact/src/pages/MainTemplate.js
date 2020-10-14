@@ -57,13 +57,14 @@ export default class MainTemplate extends React.Component  {
     console.log("soinging out...");
     firebase.auth().signOut().then(()=>{
       console.log("logging out nw")
-      this.props.system.getMember().logout(()=>{
+      this.props.system.getMember().logout(r=>{
         console.log("done...");
         window.location = "/";
         return;
       }, e=>{
-        alert("newoprlk error!");
         console.log("error - ", e)
+        window.location = "/";
+        
       });
     }).catch(function(error) {
       alert("error trying to log out...");

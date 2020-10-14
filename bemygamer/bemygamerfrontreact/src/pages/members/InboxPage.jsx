@@ -108,23 +108,23 @@ export default class InboxPage extends React.Component {
 
   formatDateTime(ft) {
     ft = new Date(ft);
-    return (ft.getMonth()+1)+"/"+ft.getDate()+"/"+ft.getFullYear()+" "+ft.getHours()+" "+ft.getMinutes()+":"+ft.getSeconds();
+    return (ft.getMonth()+1)+"/"+ft.getDate()+"/"+ft.getFullYear()+" "+ft.getHours()+":"+ft.getMinutes()+":"+ft.getSeconds();
   }
 
   renderChat() {
     return (
       <div id="pageInboxChat">
         <LoadingPage message="Loading your chat..." show={(!this.state.isLoaded).toString()} />
-        <div className="center">
+        <div className="center" style={{background:"black", color:"white", opacity:".8"}}>
           <h1>Chatting With, {this.state.otherMember.name}</h1>
-          <img src={this.state.otherMember.photos[0]} width="100px" height="100px" />
+          <img style={{borderRadius:"10vw"}} src={this.state.otherMember.photos[0]} width="100px" height="100px" />
         </div>
         <div id="boxChat" style={{ height: this.state.boxHeight }}>
-          <div className="boxChatMessages" style={{overflowX:"scroll"}}>
+          <div className="boxChatMessages" style={{overflowY:"scroll"}}>
             {
               this.state.chatMessages.map(message => {
                 return (
-                  <div key={message.id}>
+                  <div key={message.id} style={{marginBottom:"1vw"}}>
                       <div style={{textDecoration:"underline", fontWeight:"bold"}}>{message.fromMemberName}</div>
                       <div>{this.formatDateTime(message.dateTimeSent)}</div>
                       <div>
@@ -136,8 +136,9 @@ export default class InboxPage extends React.Component {
             }
             <div ref={r=>{this.refBottomBox = r;}}></div>
           </div>
-          <input autoComplete="off" value={this.state.inputChatMessage} onKeyDown={this.keyPress.bind(this)} onChange={this.onChange.bind(this)}
-            name="inputChatMessage" className="inputChatMessage" type="text" />
+          <input autoComplete="off"  value={this.state.inputChatMessage} 
+          onKeyDown={this.keyPress.bind(this)} onChange={this.onChange.bind(this)}
+            name="inputChatMessage" placeholder="type your message..." className="inputChatMessage" type="text" />
         </div>
 
       </div>

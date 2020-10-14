@@ -73,7 +73,7 @@ export default class BeMyGamerMember {
     }
 
     logout(token, cb, networkerrcb) {
-        console.log("WTD!!!")
+        //console.log("WTD!!!")
         this.system.get(`members/logout/`, cb, networkerrcb);
     }
 

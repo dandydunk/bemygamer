@@ -1,4 +1,4 @@
-this.timeoutMs = 100;
+this.timeoutMs = 10;
 this.lastIndex = 0;
 this.memberId = 0;
 this.apiServer = null;
