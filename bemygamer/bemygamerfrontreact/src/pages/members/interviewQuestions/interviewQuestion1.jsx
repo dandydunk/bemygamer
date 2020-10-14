@@ -215,7 +215,7 @@ export default class InterviewQuestion1 extends React.Component {
       return;
     }
 
-    this.state.isSavingPhotos = true;
+    this.setState({isSavingPhotos:true});
     console.log("saving photos...");
     this.props.system.getMember().savePhotos(this.state.photos, e => {
       if (e.error) {
@@ -227,7 +227,7 @@ export default class InterviewQuestion1 extends React.Component {
           console.log(e);
         }
 
-        this.state.isSavingPhotos = false;
+        this.setState({isSavingPhotos:false});
         return;
       }
 
