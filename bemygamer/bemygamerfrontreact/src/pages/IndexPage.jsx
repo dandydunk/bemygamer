@@ -131,6 +131,11 @@ export default class IndexPage extends React.Component {
                     <h3 className="color-FF5D7A">Browse profiles and chat with gamers with interests that you will enjoy.</h3>
                 </div>
 
+                <video src="/videos/landing/main.mp4" loop muted autoPlay playsInline
+                style={{width:"100vw", height:"100vh", objectFit:"cover"}}>
+
+                </video>
+
                 <div style={{display:"flex", width:"100vw", height:"100vh", flexWrap:"wrap", flexShrink:4, alignSelf:"center", justifyContent:"center"}}>
                     <img style={{width:"40vw"}} src="/images/landing/be_my_gamer.png" alt="Be My Gamer" />
 
