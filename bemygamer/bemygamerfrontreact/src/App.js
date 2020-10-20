@@ -4,16 +4,10 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import { useRouteMatch } from "react-router-dom";
-import * as firebase from "firebase/app";
-import InboxPage from "./pages/members/InboxPage"
-import DashboardPage from './pages/members/DashboardPage'
 import BeMyGamer from './system/BeMyGamer';
 import LoadingPage from "./pages/LoadingPage"
 import IndexPage from './pages/IndexPage'
-import LoginPage from "./pages/members/LoginPage"
 import InterviewPage from "./pages/members/InterviewPage"
-import EditProfilePage from "./pages/members/EditProfilePage"
 import MemberPage from './pages/members/MemberPage';
 
 export default class App extends React.Component {
@@ -56,7 +50,7 @@ export default class App extends React.Component {
       "/images/backgrounds/673328.png",
       "/images/backgrounds/love.png",
       "/images/backgrounds/purple.jpg",
-      "/images/backgrounds/pokeone.jpg",
+      "/images/landing/pokeone.jpg",
       "/images/backgrounds/stain.jpg",
       "/images/icons/female_user.png",
       "/images/landing/be_my_gamer.png",
